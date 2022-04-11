@@ -1,0 +1,58 @@
+<div class="container">
+  <div class="row float-right" *ngIf="timer">Api Call Timer : {{ timer }}</div>
+  <div class="row">
+    <div class="card mt-5 upload-file">
+      <div class="card-body">
+        <label for="last-name" class="form-label"
+          ><span class="text-danger">*</span>Upload file: </label
+        ><br />
+        <input
+          id="last-name"
+          (change)="onFileSelected($event)"
+          type="file"
+          class="file-upload"
+        /><br />
+        <!-- <div
+            *ngIf="isSubmitted && f.profileImage.errors"
+            class="invalid-feedback"
+          >
+            <div *ngIf="f.profileImage.errors.required">
+              File Upload is required
+            </div> -->
+        <div class="show-image" *ngIf="imgURL">
+          <img class="profile-image" [src]="imgURL" />
+        </div>
+        <!-- </div> -->
+      </div>
+    </div>
+  </div>
+  <div class="row mt-5">
+    <div class="card col-9 table" *ngIf="responseList.length">
+      <div class="card-body">
+        <ngx-datatable
+          class="material striped"
+          [rows]="responseList"
+          [columns]="columns"
+          [headerHeight]="50"
+          [footerHeight]="50"
+          rowHeight="auto"
+        >
+        </ngx-datatable>
+      </div>
+    </div>
+    <div class="card text col-4 offset-4" *ngIf="!isDetail && isApiColled">
+      <h3 class="text-center m-5">No Details Found</h3>
+    </div>
+  </div>
+</div>
+<!-- <div class="row">
+  <div class="col-12 text-center">
+    <h1 *ngIf="isSubmitted">Scanning...</h1>
+  </div>
+</div> -->
+
+<ng-template #profile let-value="value" let-row="row">
+  <a [href]="value" target="blank">
+    <img class="profile-image1 mt-2" [src]="value" />
+  </a>
+</ng-template>
